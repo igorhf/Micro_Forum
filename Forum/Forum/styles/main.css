@@ -1,2 +1,58 @@
 ﻿body {
+    margin: 0px;
+    padding: 0px;
+    background-color: rgb(200,200,200);
+}
+.header{
+    background-color:darkgray;
+    display:flex;
+    padding:10px;    
+}
+.logo{
+    flex: 0 0 50%;
+}
+.menu{
+    text-align:right;
+    flex: 1;
+}
+ul{
+    margin-top:70px;
+    padding:0px;    
+}
+li{
+    list-style-type:none;
+    display:inline-block;
+}
+a{
+    color:azure;
+    padding:15px 12px;
+    text-decoration:none;
+}
+a:hover{
+    color:black;
+    background-color:azure;
+    transition:1s;
+}
+.footer {
+    background-color: darkgray;
+    padding: 10px;
+}
+.conteudo{
+    color:black;
+    padding:10px;
+    width:70%;
+    background-color:azure;
+    margin:auto;
+}
+.footer_produtor{
+    text-align:center;
+}
+.erro{
+    border:1px solid red;
+    padding:10px;
+    margin-bottom:1px;
+}
+.sucesso {
+    border: 1px solid green;
+    padding: 10px;
 }

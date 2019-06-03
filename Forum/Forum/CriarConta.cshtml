@@ -1,0 +1,60 @@
+﻿@{
+    Layout = "~/inc/_Layout.cshtml";
+}
+
+<div class="conteudo">
+    @{
+        bool formulario = true;
+        bool avancar = true;
+        if (IsPost)
+        {
+            //tratamento dos valores
+            string usuario = Request["usuario"];
+            string senha1 = Request["senha"];
+            string senha2 = Request["csenha"];
+            //tratamento de erro
+            if (usuario == "" || senha1 == "" || senha2 == "")
+            {
+                <div class="erro">
+                    <p>preenchar todos os campos</p>
+                </div>
+            }
+            if (avancar)
+            {
+                if (senha1 != senha2)
+                {
+                    <div class="erro">
+                        <p>Senha não são iguais</p>
+                    </div>
+                    avancar = false;
+                }
+            }
+            //verificar ser usuario ja existe
+            if (avancar)
+            {
+                Database bd = Database.Open("forum");
+                var dados = bd.Query("SELECT * FROM utilizadores WHERE nome = @0", usuario);
+                if (dados.Count() != 0)
+                {
+                <div class="erro">
+                    <p>Usuario já existe</p>
+                </div>                
+                }
+            }
+        }
+        if (formulario)
+        {
+            <h1>CRIAR NOVA CONTA</h1>
+
+            <form action="" method="post">
+                <label>Usuario: </label>
+                <input type="text" name="usuario" value="" /><br /><br />
+                <label>Senha: </label>
+                <input type="text" name="senha" value="" /><br /><br />
+                <label>Confirmar Senha: </label>
+                <input type="text" name="csenha" value="" /><br /><br />
+                <input type="submit" name="btn" value="Enviar" />
+            </form>
+        }
+    }
+</div>
