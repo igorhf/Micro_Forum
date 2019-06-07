@@ -3,4 +3,12 @@
 }
 <div class="conteudo">
     <p>Esta e o Conteudo da Pagina.</p>
+    @{
+        Database sbd = Database.Open("forum");
+        var sselect = sbd.Query("SELECT * FROM posts");
+        var tabela = new WebGrid(sselect);
+        <div>
+            @tabela.GetHtml()
+        </div>
+    }
 </div>

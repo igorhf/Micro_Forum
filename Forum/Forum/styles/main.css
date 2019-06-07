@@ -23,12 +23,12 @@ li{
     list-style-type:none;
     display:inline-block;
 }
-a{
+ul li a{
     color:azure;
     padding:15px 12px;
     text-decoration:none;
 }
-a:hover{
+ul li a:hover{
     color:black;
     background-color:azure;
     transition:1s;
@@ -41,7 +41,7 @@ a:hover{
     color:black;
     padding:10px;
     width:70%;
-    background-color:azure;
+    background-color:white;
     margin:auto;
 }
 .footer_produtor{
@@ -55,4 +55,7 @@ a:hover{
 .sucesso {
     border: 1px solid green;
     padding: 10px;
+}
+.voltar{
+    padding: 15px;
 }

@@ -6,6 +6,7 @@
     @{
         bool formulario = true;
         bool avancar = true;
+        int id = 0;
         if (IsPost)
         {
             //tratamento dos valores
@@ -18,7 +19,9 @@
                 <div class="erro">
                     <p>preenchar todos os campos</p>
                 </div>
+                avancar = false;
             }
+            // validação de de senha
             if (avancar)
             {
                 if (senha1 != senha2)
@@ -36,22 +39,34 @@
                 var dados = bd.Query("SELECT * FROM utilizadores WHERE nome = @0", usuario);
                 if (dados.Count() != 0)
                 {
-                <div class="erro">
-                    <p>Usuario já existe</p>
-                </div>                
+                    <div class="erro">
+                        <p>Usuario já existe</p>
+                    </div>
+                    avancar = false;
                 }
+            }
+            // cadastro usuario
+            if (avancar)
+            {
+                Database bd = Database.Open("forum");
+                var cont = bd.Query("SELECT * FROM utilizadores");
+                id = 1 + cont.Count();
+                var dados = bd.Query("INSERT INTO utilizadores values(@0,@1,@2)", id, usuario, senha1);
+                <div class="sucesso">
+                    <p>Cadastrado com Sucesso</p>
+                </div>                
+                formulario = false;
             }
         }
         if (formulario)
         {
-            <h1>CRIAR NOVA CONTA</h1>
-
+            <h2>CRIAR NOVA CONTA</h2>
             <form action="" method="post">
-                <label>Usuario: </label>
+                <label>Usuario: </label><br />
                 <input type="text" name="usuario" value="" /><br /><br />
-                <label>Senha: </label>
+                <label>Senha: </label><br />
                 <input type="text" name="senha" value="" /><br /><br />
-                <label>Confirmar Senha: </label>
+                <label>Confirmar Senha: </label><br />
                 <input type="text" name="csenha" value="" /><br /><br />
                 <input type="submit" name="btn" value="Enviar" />
             </form>

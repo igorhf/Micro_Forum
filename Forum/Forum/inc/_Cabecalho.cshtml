@@ -7,17 +7,22 @@
     </div>
     <div class="menu">
         @{
-            if (Request.IsAuthenticated == false)
+            if (Session["user"] == null)
             {
-                <ul>
+                <ul>                    
+                    <li><a href="~/index.cshtml">Inicio</a></li>
                     <li><a href="~/CriarConta.cshtml">Cadastrar Uusuario</a></li>
-                    <li><a href="#">Entar</a></li>
+                    <li><a href="~/login.cshtml">Entar</a></li>
                 </ul>
             }
             else
             {
                 <ul>
-                    <li><a href="#">Deslogar</a></li>
+                    <li><a style="background-color:azure;color:black">@Session["id"]</a></li>
+                    <li><a style="background-color:azure;color:black">@Session["nome"]</a></li>
+                    <li><a href="~/index.cshtml">Inicio</a></li>
+                    <li><a href="~/CadastroPost.cshtml">Cadastro Post</a></li>
+                    <li><a href="~/deslogin.cshtml">Deslogar</a></li>
                 </ul>
             }
         }

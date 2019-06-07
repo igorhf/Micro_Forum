@@ -1,0 +1,59 @@
+﻿@{
+    Layout = "~/inc/_Layout.cshtml";
+}
+<div class="conteudo">
+@{     
+    bool avancar = true;
+    if (IsPost)
+    {
+        //tratamento dos valores
+        string usuario = Request["usuario"];
+        string senha1 = Request["senha"];
+        //tratamento de erro
+        if (usuario == "" || senha1 == "")
+        {
+            <div class="erro">
+                <p>preenchar todos os campos</p>
+            </div>
+            avancar = false;
+        }
+        //verificar ser usuario ja existe
+        if (avancar)
+        {
+            Database bd = Database.Open("forum");
+            var dados = bd.Query("SELECT * FROM utilizadores WHERE nome = @0", usuario);
+            if (dados.Count() == 0)
+            {
+                <div class="erro">
+                    <p>Usuario não existe</p>
+                </div>
+                avancar = false;
+            }
+            //os dados do usuario ira ser armazenado na session
+            else
+            {
+                var result = dados = bd.Query("SELECT * FROM utilizadores WHERE nome = @0 AND palavra_passe = @1", usuario,senha1);
+                if(dados.Count() != 0)
+                {
+                    foreach ( var dado in result)
+                    {
+                        Session["id"] = dado.id_utilizador;
+                        Session["nome"] = dado.nome;
+                        Session["user"] = true;
+                    }                                       
+                    // ira ser redirecionado para a pagina principal ao realizar o login com sucesso
+                    Response.Redirect("~/index.cshtml");
+                }
+            }
+        }
+    }
+}
+    <h2>Realize o seu Login</h2>
+    <form action="" method="post">
+        <label>Usuario:</label><br />
+        <input type="text" name="usuario" value=""/><br /><br />
+        <label>Senha:</label><br />
+        <input type="password" name="senha" value=""/><br /><br />
+        <input type="submit" name="btn" value="Entrar"/>
+    </form>
+</div>

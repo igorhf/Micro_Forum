@@ -1,0 +1,53 @@
+﻿@{
+    Layout = "~/inc/_Layout.cshtml";
+}
+<div class="conteudo">
+@{ 
+    bool avancar = true;
+    bool formulario = true;
+    if (IsPost)
+    {
+        // tratamento das variaveis
+        int IdPost = 0;
+        var IdUser = (int)Session["id"];
+        string titulo = Request["titulo"];
+        string texto = Request["texto"];
+        DateTime datatime = DateTime.Now;
+        // conecxao com o banco e dados
+        Database bd = Database.Open("forum");               
+        // tratamento de erros
+        if (avancar)
+        {
+            if(titulo == "" || texto == "")
+            {
+                <div class="erro">
+                    <p>preenchar todos os campos</p>
+                </div>
+                avancar = false;
+            }
+            // cadastrado com sucesso
+            else
+            {
+                <div class="sucesso">
+                    <p>post salvo com sucesso</p>
+                </div>
+                var select = bd.Query("SELECT * FROM posts");
+                IdPost = 1 + select.Count();
+                var insert = bd.Query("INSERT INTO posts values(@0,@1,@2,@3,@4)", IdPost, IdUser, titulo, texto, datatime);
+                formulario = false;
+            }
+        }
+    }
+    if (formulario)
+    {
+    <h2>Cadastro Post</h2>
+    <form action="" method="post">
+        <label>Tituno:</label><br />
+        <input type="text" name="titulo" value="" /><br /><br />
+        <label>Caixa de Texto:</label><br />
+        <textarea cols="35" rows="10" name="texto"></textarea><br /><br />
+        <input type="submit" name="btn" value="Enviar" />
+    </form>
+    }    
+}
+</div>
