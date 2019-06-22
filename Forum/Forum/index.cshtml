@@ -4,11 +4,23 @@
 <div class="conteudo">
     <p>Esta e o Conteudo da Pagina.</p>
     @{
-        Database sbd = Database.Open("forum");
-        var sselect = sbd.Query("SELECT * FROM posts");
-        var tabela = new WebGrid(sselect);
-        <div>
-            @tabela.GetHtml()
-        </div>
+        Database bd = Database.Open("forum");
+        var select = bd.Query("SELECT * FROM posts LEFT JOIN utilizadores ON posts.id_post = utilizadores.id_utilizador ORDER BY posts.atualizacao ASC");
+
+        foreach (var post in select)
+        {
+            <div class="post_main">
+                <div class="post_titulo">
+                    <p>@post["titulo"]</p>
+                </div>
+                <div class="post_mensagem">
+                    <p>@post["mensagem"]</p>
+                </div>                
+                <div class="post_descricao">
+                    <p>NOME: @post["nome"] / DATA: @post["atualizacao"]</p>
+                </div>
+            </div>
+        }
+
     }
 </div>

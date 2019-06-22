@@ -44,6 +44,34 @@ ul li a:hover{
     background-color:white;
     margin:auto;
 }
+.post_main {
+    width: 100%;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    background-color: rgb(220,220,220);
+    border:1px solid;
+}
+.post_titulo{
+    font-family:Verdana;
+    font-weight:bold;
+    font-size:1.1em;
+    color:dodgerblue;
+    margin-left:10px;
+}
+.post_titulo p{
+    padding:0px;
+    margin:0px
+}
+.post_mensagem{
+    font-family:'Times New Roman', Times, serif;
+
+}
+.post_descricao {
+    font-family: Verdana;
+    font-weight: bold;
+    font-size: 0.5em;
+    color: darkslategrey;
+}
 .footer_produtor{
     text-align:center;
 }
