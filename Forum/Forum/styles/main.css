@@ -72,6 +72,20 @@ ul li a:hover{
     font-size: 0.5em;
     color: darkslategrey;
 }
+.post_editar{
+    padding-left:3px;
+}
+.post_editar p {
+    padding:0px;
+    margin:0px;
+}
+.post_editar p a {
+    text-decoration:none;
+    color:black;
+}
+.post_editar p a:hover {
+    color:red;
+}
 .footer_produtor{
     text-align:center;
 }

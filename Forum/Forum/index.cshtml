@@ -19,6 +19,20 @@
                 <div class="post_descricao">
                     <p>NOME: @post["nome"] / DATA: @post["atualizacao"]</p>
                 </div>
+                <div class="post_editar">
+                    <p>
+                        @{                            
+                            if (Session["id"] != null)
+                            {
+                                var id = (int)Session["id"];
+                                if (post["id_utilizador"] == id)
+                                {
+                                    <a href="~/AlterarPost.cshtml?id=@post["id_post"]">Editar</a>
+                                }
+                            }
+                        }
+                    </p>
+                </div>
             </div>
         }
 

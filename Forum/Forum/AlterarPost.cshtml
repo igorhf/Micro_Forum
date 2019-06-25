@@ -1,0 +1,50 @@
+﻿@{
+    Layout = "~/inc/_Layout.cshtml";
+}
+@{
+    // tratamento do variavel
+    var idPost = Request["id"];   
+    Database bd = Database.Open("forum");
+    // tratamento de erro da variavel
+    if (idPost != null)
+    {       
+        <h1>Post Atual</h1>            
+            var select = bd.Query("SELECT * FROM posts LEFT JOIN utilizadores ON posts.id_post = utilizadores.id_utilizador WHERE id_Post=" + idPost + "");
+
+            foreach (var post in select)
+            {
+            <div class="post_main">
+                <div class="post_titulo">
+                    <p>@post["titulo"]</p>
+                </div>
+                <div class="post_mensagem">
+                    <p>@post["mensagem"]</p>
+                </div>
+                <div class="post_descricao">
+                    <p>NOME: @post["nome"] / DATA: @post["atualizacao"]</p>
+                </div>
+            </div>
+            }        
+        //formulario
+        <h2>Alterar Post</h2>
+        <form action="" method="post">
+            <label>Tituno:</label><br />
+            <input type="text" name="titulo" value="" /><br /><br />
+            <label>Caixa de Texto:</label><br />
+            <textarea cols="35" rows="10" name="texto"></textarea><br /><br />
+            <input type="submit" name="btn" value="Enviar" />
+        </form>     
+        // se todos os campos for preenchido ira executar o salvamento dos dados
+        if (Request["titulo"] != null && Request["texto"] != null)
+        {            
+            string titulo = Request["titulo"];
+            string texto = Request["texto"];
+            var update = bd.Query("UPDATE posts set titulo = '"+titulo+"', mensagem = '"+texto+"' where id_post = "+idPost+"");
+            Response.Redirect("~/AlterarPost.cshtml?id="+idPost);
+        }
+    }
+    else
+    {
+        <h1 style="color:red">erro, usuario não esta logado</h1>
+    }
+}
