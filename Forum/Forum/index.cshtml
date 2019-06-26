@@ -19,7 +19,7 @@
                 <div class="post_descricao">
                     <p>NOME: @post["nome"] / DATA: @post["atualizacao"]</p>
                 </div>
-                <div class="post_editar">
+                <div class="post_opc">
                     <p>
                         @{                            
                             if (Session["id"] != null)
@@ -28,6 +28,7 @@
                                 if (post["id_utilizador"] == id)
                                 {
                                     <a href="~/AlterarPost.cshtml?id=@post["id_post"]">Editar</a>
+                                    <a href="~/ExcluirPost.cshtml?id=@post["id_post"]">Excluir</a>
                                 }
                             }
                         }

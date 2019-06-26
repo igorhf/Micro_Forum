@@ -1,0 +1,54 @@
+﻿@{
+    Layout = "~/inc/_Layout.cshtml";
+}
+<div class="conteudo">
+    @{
+        // tratamento do variavel
+        var idPost = Request["id"];
+        Database bd = Database.Open("forum");
+        // tratamento de erro da variavel
+        if (idPost != null)
+        {
+            // ira consulta se o dados existe
+            var select = bd.Query("SELECT * FROM posts LEFT JOIN utilizadores ON posts.id_post = utilizadores.id_utilizador WHERE id_Post=" + idPost + "");
+            if (select.Count() != 0)
+            {
+                <h1>Post Atual</h1>
+                foreach (var post in select)
+                {
+                    <div class="post_main">
+                        <div class="post_titulo">
+                            <p>@post["titulo"]</p>
+                        </div>
+                        <div class="post_mensagem">
+                            <p>@post["mensagem"]</p>
+                        </div>
+                        <div class="post_descricao">
+                            <p>NOME: @post["nome"] / DATA: @post["atualizacao"]</p>
+                        </div>
+                    </div>
+                }
+                // formulario
+                <form action="" method="post">
+                    <h3>Precione o botão para excluir o poste</h3>
+                    <input type="submit" name="btn" value="Excluir" />
+                </form>
+            }
+            // se os dados for excluido com sucesso
+            else
+            {
+                <h3 style="color:green">post excluido com sucesso</h3>
+            }
+            // processo de exclucao do arquivo
+            if (Request["btn"] != null)
+            {
+                var delete = bd.Query("DELETE posts where id_post = " + idPost + "");
+                Response.Redirect("~/ExcluirPost.cshtml?id=" + idPost);
+            }
+        }
+        else
+        {
+            <h1 style="color:red">erro, usuario não esta logado</h1>
+        }
+    }
+</div>

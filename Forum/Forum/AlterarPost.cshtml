@@ -1,13 +1,14 @@
 ﻿@{
     Layout = "~/inc/_Layout.cshtml";
 }
+<div class="conteudo">
 @{
     // tratamento do variavel
-    var idPost = Request["id"];   
+    var idPost = Request["id"];    
     Database bd = Database.Open("forum");
     // tratamento de erro da variavel
     if (idPost != null)
-    {       
+    {
         <h1>Post Atual</h1>            
             var select = bd.Query("SELECT * FROM posts LEFT JOIN utilizadores ON posts.id_post = utilizadores.id_utilizador WHERE id_Post=" + idPost + "");
 
@@ -48,3 +49,4 @@
         <h1 style="color:red">erro, usuario não esta logado</h1>
     }
 }
+</div>

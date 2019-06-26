@@ -64,7 +64,6 @@ ul li a:hover{
 }
 .post_mensagem{
     font-family:'Times New Roman', Times, serif;
-
 }
 .post_descricao {
     font-family: Verdana;
@@ -72,18 +71,19 @@ ul li a:hover{
     font-size: 0.5em;
     color: darkslategrey;
 }
-.post_editar{
+.post_opc{
     padding-left:3px;
 }
-.post_editar p {
+.post_opc p {
     padding:0px;
     margin:0px;
 }
-.post_editar p a {
+.post_opc p a {
     text-decoration:none;
     color:black;
+    margin-left:5px;
 }
-.post_editar p a:hover {
+.post_opc p a:hover {
     color:red;
 }
 .footer_produtor{
