@@ -4,6 +4,7 @@
 <div class="conteudo">
     <p>Esta e o Conteudo da Pagina.</p>
     @{
+
         Database bd = Database.Open("forum");
         var select = bd.Query("SELECT * FROM posts LEFT JOIN utilizadores ON posts.id_post = utilizadores.id_utilizador ORDER BY posts.atualizacao ASC");
 
